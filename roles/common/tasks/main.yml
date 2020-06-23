@@ -1,0 +1,23 @@
+
+- name: Check Path Exists 10.0.3.160
+  stat:
+    path: "/home/{{ operating_system }}/New"
+  register: directory_exists
+
+- debug:
+    msg: "{{ directory_exists }}"
+ 
+- name: Create Directory 
+  file: path="$HOME/New" state=directory mode=0755 
+  when: directory_exists.stat.exists == false
+  register: directory_output
+
+- debug:
+    msg: "{{ directory_output }}"
+
+- name: Create the file
+  file: path="/home/{{ operating_system }}/New/new.txt" state=touch mode=0755
+  register: file_output_log
+  
+- debug:
+    msg: "{{ file_output_log }}"
