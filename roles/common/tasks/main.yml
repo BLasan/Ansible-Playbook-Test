@@ -21,3 +21,16 @@
   
 - debug:
     msg: "{{ file_output_log }}"
+
+- block:
+    - name: Searching Directory
+      command: ls /temp
+  rescue:
+    - name: Jump to Error
+      debug:
+        msg: "Error Block"
+  always:
+    - name: Jump to Finally 
+      debug:
+        msg: "Finally Block"
+
