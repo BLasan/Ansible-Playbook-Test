@@ -3,5 +3,4 @@
 - name: apply the webserver configuration 
   hosts: all
   roles:
-    - role: common
-      tags: common
+    - web
